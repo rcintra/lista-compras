@@ -1,0 +1,12 @@
+<mat-list class="compra-list" role="list" *ngFor="let compra of compras">
+  <mat-list-item role="listitem">
+    <div mat-line [ngClass]="compra.complete ? 'done' : ''">{{ compra.title }}</div>
+      <button mat-icon-button color="secondary" (click)="check(compra.id)">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+  </mat-list-item>
+</mat-list>
+
