@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: npm install and npm run build
-        run: |
-          ng build --aot
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - run: npm install
+      - run: npm install -g @angular/cli > /dev/null
+      - run: ng build --prod --output-path=dist --base-href="https://lista-compras-37d6a.web.app/compras"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
