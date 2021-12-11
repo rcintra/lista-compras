@@ -1,3 +1,17 @@
+.compra-form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.compra-form input {
+  width: 100%;
+}
+
+.compra-full-width {
+  width: 100%;
+}
+
 .done {
   text-decoration: line-through;
 }

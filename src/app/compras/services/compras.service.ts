@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Compra } from '../model/compra';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,24 @@ export class ComprasService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http.get(this.baseUrl).pipe(map((response: any) => {
-      return response;
-    }));
+    return this.http.get<Compra[]>(this.baseUrl);
+  }
+
+  addItem(data: Compra) {
+    return this.http.post(this.baseUrl, data).pipe(map(
+      (response: any) => {
+        return response;
+      }
+    ))
+  }
+
+  updateItem(id: string) {
+    let compra: Compra = { id: '', title: '', complete: false };
+    return this.http.put(`${this.baseUrl}/${id}`, compra);
+  }
+
+  deleteItem(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }
