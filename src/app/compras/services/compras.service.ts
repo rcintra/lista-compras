@@ -25,9 +25,8 @@ export class ComprasService {
     ))
   }
 
-  updateItem(id: string) {
-    let compra: Compra = { id: '', title: '', complete: false };
-    return this.http.put(`${this.baseUrl}/${id}`, compra);
+  updateItem(id: string, compras: Compra[]) {
+    return this.http.put(`${this.baseUrl}/${id}`, compras);
   }
 
   deleteItem(id: string) {

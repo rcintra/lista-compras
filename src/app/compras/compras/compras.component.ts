@@ -42,12 +42,10 @@ export class ComprasComponent implements OnInit {
     }
 
     this.comprasService.addItem(itemObj).subscribe((res) => {
-      console.log(res);
+       this.consultarCompras();
     });
 
     form.resetForm();
-
-    this.consultarCompras();
 
   }
 
@@ -59,16 +57,16 @@ export class ComprasComponent implements OnInit {
 
   check(id: string) {
     console.log('update Item: ' + id);
-    this.compras.filter( c => (c.id === id)
-      ? this.comprasService.updateItem(id).subscribe()
-      : console.log('Compra nao encontrada'));
-    this.consultarCompras();
+    this.comprasService.updateItem(id, this.compras).subscribe(data => {
+        this.consultarCompras();
+    })
   }
 
   delete(id: string) {
     console.log('Delete Item: ' + id);
-    this.comprasService.deleteItem(id).subscribe();
-    this.consultarCompras();
+    this.comprasService.deleteItem(id).subscribe(data => {
+      this.consultarCompras();
+    });
   }
 
 }
