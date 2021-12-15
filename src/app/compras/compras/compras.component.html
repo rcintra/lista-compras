@@ -2,19 +2,24 @@
   <mat-toolbar color="primary">
     <span style="text-align: center;">Lista de Compras</span>
   </mat-toolbar>
-  <form class="compra-form" #form="ngForm" (ngSubmit)="onSubmit(form)">
-    <mat-form-field class="compra-full-width" appearance="fill">
-      <mat-label>Item da Compra</mat-label>
-      <input type="text" id="title" name="title" matInput [errorStateMatcher]="matcher"
-        placeholder="Ex: 1 Arroz" ngModel>
-      <button type="submit" matSuffix mat-icon-button>
-        <mat-icon>add</mat-icon>
-      </button>
-      <mat-error *ngIf="titleFormControl.hasError('required')">
-        Item é <strong>obrigatorio</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
+
+    <div class="form-input-row">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" style="width: 100%;">
+        <mat-form-field class="compra-full-width" appearance="fill">
+          <mat-label>Item da Compra</mat-label>
+          <input type="text" id="title" name="title" matInput [errorStateMatcher]="matcher"
+            placeholder="Ex: 1 Arroz" ngModel />
+          <mat-error *ngIf="titleFormControl.hasError('required')">
+            Item é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <br/>
+        <button type="submit" mat-raised-button color="primary" style="width: 100%;">
+            Incluir Item
+        </button>
+      </form>
+    </div>
+
 
   <div *ngIf="compras$ | async as compras; else loading">
     <mat-list class="compra-list" role="list" *ngFor="let compra of compras">

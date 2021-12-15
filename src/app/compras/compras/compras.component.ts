@@ -54,9 +54,7 @@ export class ComprasComponent implements OnInit {
   }
 
   consultarCompras() {
-    this.comprasService.findAll().subscribe((res) => {
-      this.compras = res;
-    })
+    this.compras$ = this.comprasService.findAll();
   }
 
   check(id: string) {
