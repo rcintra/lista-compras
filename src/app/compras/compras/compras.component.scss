@@ -15,3 +15,11 @@
 .done {
   text-decoration: line-through;
 }
+
+.loading-spinner {
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

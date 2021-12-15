@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 import { Compra } from '../model/compra';
 
 @Injectable({
@@ -14,7 +14,11 @@ export class ComprasService {
   constructor(private http: HttpClient) {}
 
   findAll() {
-    return this.http.get<Compra[]>(this.baseUrl);
+    return this.http.get<Compra[]>(this.baseUrl)
+    .pipe(
+      first(),
+      tap(compras => console.log(compras))
+    );
   }
 
   addItem(data: Compra) {

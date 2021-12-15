@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 
 import { Compra } from '../model/compra';
 import { ComprasService } from '../services/compras.service';
+import { Observable } from 'rxjs';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -21,13 +22,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ComprasComponent implements OnInit {
   titleFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
-  public compras: Compra[] = [];
+  compras: Compra[] = [];
+  compras$: Observable<Compra[]>;
 
   public displayedColumns: string[] = ['title'];
 
   constructor(
     private comprasService: ComprasService
-  ) { }
+  ) {
+    this.compras$ = this.comprasService.findAll();
+  }
 
   ngOnInit(): void {
     this.consultarCompras();
